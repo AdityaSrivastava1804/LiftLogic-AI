@@ -1,0 +1,124 @@
+import pandas as pd
+
+# Load workout data
+df = pd.read_csv("data/workouts.csv")
+
+# Ask user for exercise
+exercise_name = input("Exercise to analyze: ").lower()
+
+# Filter exercise data
+exercise_data = df[
+    df["Exercise"].str.lower() == exercise_name
+]
+
+print("\nWorkout History")
+print(exercise_data)
+
+# Need at least 3 sessions
+if len(exercise_data) < 3:
+    print("\nNot enough data for plateau analysis.")
+    exit()
+
+# Last 3 sessions
+recent = exercise_data.tail(3)
+
+weights = recent["Weight"].tolist()
+rpes = recent["RPE"].tolist()
+
+print("\nRecent Weights:", weights)
+print("Recent RPEs:", rpes)
+
+plateau_score = 0
+causes = []
+
+# ---------------------------
+# Plateau Detection Logic
+# ---------------------------
+
+# Weight not increasing
+if len(set(weights)) == 1:
+    plateau_score += 1
+    causes.append("No weight progression")
+
+# RPE increasing
+if rpes[-1] > rpes[0]:
+    plateau_score += 1
+    causes.append("Fatigue accumulating")
+
+# Average RPE high
+avg_rpe = sum(rpes) / len(rpes)
+
+if avg_rpe >= 8.5:
+    plateau_score += 1
+    causes.append("Recovery limitations")
+
+print("\n--- Analysis ---")
+
+# ---------------------------
+# Root Cause Scores
+# ---------------------------
+
+recovery_score = 0
+tricep_score = 0
+volume_score = 0
+
+if avg_rpe >= 8.5:
+    recovery_score = 60
+
+if len(set(weights)) == 1:
+    tricep_score = 25
+
+if rpes[-1] > rpes[0]:
+    volume_score = 15
+
+# ---------------------------
+# Plateau Result
+# ---------------------------
+
+if plateau_score >= 2:
+
+    print("🚨 Plateau Detected")
+
+    if plateau_score == 2:
+        confidence = "Moderate"
+    else:
+        confidence = "High"
+
+    print(f"Confidence: {confidence}")
+
+    print("\nRoot Cause Analysis")
+
+    print(f"{recovery_score}% Recovery Issues")
+    print(f"{tricep_score}% Weak Triceps")
+    print(f"{volume_score}% Insufficient Volume")
+
+    print("\nPossible Causes:")
+    for cause in causes:
+        print("-", cause)
+
+else:
+
+    confidence = "Low"
+
+    print("✅ No Plateau Detected")
+
+# ---------------------------
+# Save Report For Other Agents
+# ---------------------------
+
+report = pd.DataFrame({
+    "Exercise": [exercise_name],
+    "PlateauDetected": [plateau_score >= 2],
+    "Confidence": [confidence],
+    "RecoveryIssues": [recovery_score],
+    "WeakTriceps": [tricep_score],
+    "VolumeIssues": [volume_score]
+})
+
+report.to_csv(
+    "data/plateau_report.csv",
+    index=False
+)
+
+print("\nPlateau report saved to:")
+print("data/plateau_report.csv")
