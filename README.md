@@ -1,22 +1,22 @@
-LiftLogic AI
+##LiftLogic AI
 
 AI-powered strength coaching platform that helps lifters track workouts, detect training plateaus, analyze root causes, predict future PRs, and generate personalized training recommendations.
 
 ⸻
 
-Features
+##Features
 
-Workout Logging
+##Workout Logging
 
 * Log exercises, weight, sets, reps, and RPE
 * Store training history in CSV format
 
-Plateau Detection
+##Plateau Detection
 
 * Detect stalled progress automatically
 * Identify lifts that are no longer improving
 
-Root Cause Analysis
+##Root Cause Analysis
 
 * Analyze possible causes of stalled progress
 * Detect issues such as:
@@ -24,13 +24,13 @@ Root Cause Analysis
     * Insufficient intensity
     * Lack of progression
 
-AI Coaching
+##AI Coaching
 
 * Personalized coaching feedback using Gemini AI
 * Exercise-specific recommendations
 * Actionable next steps for improvement
 
-Coaching Memory
+##Coaching Memory
 
 * Stores athlete profile information:
     * Goal
@@ -39,18 +39,18 @@ Coaching Memory
     * Training frequency
     * Preferred lift
 
-Progress Dashboard
+##Progress Dashboard
 
 * Interactive strength progress charts
 * Bench, Squat, and Deadlift tracking
 * Personal record visualization
 
-PR Prediction
+##PR Prediction
 
 * Uses Linear Regression to estimate future strength progression
 * Predicts upcoming PRs based on training history
 
-AI Training Block Generator
+##AI Training Block Generator
 
 * Generates personalized 4-week training programs
 * Adapts to:
@@ -60,7 +60,7 @@ AI Training Block Generator
 
 ⸻
 
-Tech Stack
+##Tech Stack
 
 * Python
 * Streamlit
@@ -72,7 +72,7 @@ Tech Stack
 
 ⸻
 
-Project Structure
+##Project Structure
 
 LiftLogic-AI/
 
@@ -98,14 +98,14 @@ LiftLogic-AI/
 
 ⸻
 
-Installation
+##Installation
 
 Clone the repository:
 
 git clone https://github.com/AdityaSrivastava1804/LiftLogic-AI.git
 cd LiftLogic-AI
 
-Install dependencies:
+##Install dependencies:
 
 python3 -m pip install -r requirements.txt
 
@@ -119,7 +119,7 @@ streamlit run frontend/app.py
 
 ⸻
 
-Future Improvements
+##Future Improvements
 
 * User authentication
 * Cloud database integration
@@ -129,7 +129,7 @@ Future Improvements
 
 ⸻
 
-Author
+##Author
 
 Aditya Kumar Srivastava
 
